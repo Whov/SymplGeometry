@@ -1,0 +1,78 @@
+\documentclass[]{article}
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\newcommand{\intprod}{\mathbin{\raisebox{\depth}{\scalebox{1}[-1]{$\lnot$}}}}% per fare l'hook della formula di Cartan
+\newcommand{\w}{\omega}
+
+%opening
+\title{Brevissime note di geometria simplettica}
+\author{Bruno Bucciotti}
+
+\begin{document}
+	
+\maketitle
+	
+\begin{abstract}
+	TO DO. Poichè le coordinate qui vengono "a coppie", in uno spazio $2n$ dimensionale indico le prime $n$ coordinate con $X^{q^i}$, le successive $n$ con $X^{p_i}$. Si farà ampio uso delle note sull'Isham, in particolare non citerò l'uso della "formula per la derivata esterna" per le 0 forme.
+\end{abstract}
+	
+\section{Symplectic manifold}
+\subparagraph{Definizione}
+Coppia $(M, \w)$ con $M$ varietà differenziabile, $\w$ forma bilineare antisimmetrica, chiusa ($\w = d\alpha$) non degenere ($\forall u\in M,\, \w(u, v) = 0 \implies v=0$).
+
+\subparagraph{Symplectomorphism}
+Data una mappa $\phi: \mathcal{M} \rightarrow \mathcal{N}$ fra due spazi simplettici, $\phi$ è simplettomorfismo (trasformazione canonica) quando $\phi^*\w_N = \w_M$.
+
+\subparagraph{Darboux}
+Esiste sempre un sistema di coordinate, dette canoniche, per cui $\w = \sum dx^i \wedge dp_i$
+
+\subparagraph{Isomorfismo fra campi vettoriali e 1-forme}
+Dato un campo vettoriale $\Omega_\alpha$ posso costruire l'1-forma $\alpha = \w(\Omega_\alpha, *)$. La mappa è lineare e iniettiva (per non degenerazione di $\w$), dunque per dimensionalità è un isomorfismo.
+
+\subparagraph{Symplectic vector field}
+Un campo vettoriale $X$ si dice simplettico se il suo flusso preserva la forma simplettica. Si scrive $\mathcal{L}_X \w = 0$ o equivalentemente, detto $\phi$ il flusso associato a $X$, $\phi_t^* \w = \w$.\\
+Proof: la freccia a sinistra segue dalla definizione di $\mathcal{L}_X$, l'altra si fa considerando $f_p(t) = (\phi_t^* \w)(p)$ (al variare di $t$ sono forme tutte in $p$, quindi ha senso la differenza); $\dfrac{df_p}{dt} |_{t=s} = \phi_s^* (\mathcal{L}_X \w) = 0$, cioè $f_p$ costante.\\
+Un'altra definizione possibile è $\Omega_\alpha$ simplettico quando $\alpha$, associata mediante $\w$, è chiusa. Il conto usa la formula di Cartan e la chiusura di $\w$: $\mathcal{L}_{\Omega_\alpha} \w = d (\w(\Omega_\alpha, *) ) = d\alpha$
+
+\subparagraph{Hamiltonian vector field}
+Un campo vettoriale $X_H$ si dice Hamiltoniano di Hamiltoniana $H:\mathcal{M}\rightarrow \mathbf{R}$ se $dH$ è associato a $X_H$ mediante $\w$; esplicitamente $dH = \w(X_H, *)$. Osserviamo che per la terza definizione data di campo simplettico, poichè $dH$ è una forma chiusa, $X_H$ è simplettico ($d^2=0$). Nelle coordinate canoniche ho che $dH = \sum \dfrac{\partial H}{\partial q^i} dq^i + \dfrac{\partial H}{\partial p_i} dp_i$, mentre $\w (X_H, *) = (\sum dq^i \otimes dp_i - dp_i \otimes dq^i) (X_H, *) = \sum X_H^{q^i} dp_i - X_H^{p_i} dq^i$, e dall'uguaglianza delle due ho $X_H = \left(\dfrac{\partial H}{\partial p_i}, -\dfrac{\partial H}{\partial q^i}\right)$.
+
+\subparagraph{Proprietà dei campi Hamiltoniani}
+\begin{itemize}
+	\item La combinazione lineare di Hamiltoniane genera un campo Hamiltoniano che è la combinazione lineare dei campi.
+	\item In coordinate canoniche le curve integrali del campo Hamiltoniano $X_H$ sono le traiettorie nello spazio delle fasi del sistema soggetto a evoluzione temporale data dall'Hamiltoniana $H$. 
+	\item $H$ costante lungo le curve integrali di $X_H$ ($H$ costante del moto).
+	\item Più in generale se $\{F, H\} = 0$ allora $\mathcal{L}_{X_H} F = X_H(F) = (dF)(X_H) = \w (X_F, X_H) = \{F, H\} = 0$ dove l'ultimo passaggio si giustifica o in coordinate o assumendolo come definizione di parentesi di Poisson.
+\end{itemize}
+Verso l'Identità di Jacobi. Definiamo per $f,g$ funzioni $\{f, g\} = \w(X_f, X_g)$
+\begin{itemize}
+	\item $\{a,b\} = X_b(a) = -X_a(b)$ poichè $\{a,b\} = \w(X_a,X_b) = (da)(X_b) = X_b(a)$ dove ho usato l'Hamiltonianietà di $X_a$.
+	\item $X_{\{f,g\}} = - [X_f, X_g]$ dove il meno in alcuni testi è assente perchè si cambia la definizione di Lie bracket per un segno.\\
+	$Proof$:
+	$(d\w)(X_f,X_g,V) = 0$ per chiusura di $\w$, $V$ vettore qualsiasi. Sviluppando ho:
+	$$X_f\w(X_g,V) - X_g\w(X_f,V) + V \w(X_f,X_g) - \w([X_f,X_g], V) +$$
+	$$+ \w([X_f,V],X_g) - \w([X_g,V],X_f) = 0$$
+	\begin{center}
+		allora usando l'Hamiltonianietà
+	\end{center}
+	$$X_fVg - X_gVf + V\{f,g\} - \w([X_f,X_g],V) - [X_f,V]g + [X_g,V]f = 0$$
+	\begin{center}
+		sviluppo gli ultimi 2 commutatori e uso l'identità al punto precedente dell'elenco
+	\end{center}
+	$$V\{f,g\} - \w([X_f,X_g],V) + VX_f g + VX_gf = V\{f,g\} - \w([X_f,X_g],V) - 2 V\{f,g\} = 0$$
+	\begin{center}
+		infine
+	\end{center}
+	$$V\{f,g\} = - \w([X_f,X_g], V) = (d\{f,g\})(V) = \w(X_{\{f,g\}}, V)$$
+	da cui la tesi per non degenerazione di $\w$ e l'assenza di ipotesi su $V$.
+	\item Identità di Jacobi: $\{f,\{g,h\}\} + \{g,\{h,f\}\} + \{h,\{f,g\}\} = 0$.\\
+	$Proof$:
+	$\{f,\{g,h\}\} = X_fX_gh$. Allora ho
+	$$\{f,\{g,h\}\} + X_gX_hf + X_hX_fg = \{f,\{g,h\}\} + X_gX_hf - X_hX_gf = \{f,\{g,h\}\} + [X_g,X_h]f = $$
+	$$\{f,\{g,h\}\} - X_{\{g,h\}}f = 0$$
+\end{itemize}
+
+\end{document}
